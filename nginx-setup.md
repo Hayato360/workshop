@@ -107,25 +107,39 @@ docker cp nginx-docker/index.html nginx-web:/usr/share/nginx/html/
 docker exec nginx-web cat /usr/share/nginx/html/index.html
 ```
 
-## 🌐 ทดสอบเว็บไซต์
+## 🔄 สร้าง Image จาก Container ที่มีไฟล์จริง
+
+### Commit Container เป็น Image ใหม่ก่อน
+```commandline
+docker commit nginx-web custom-nginx:uat-v0.0.1
+```
+
+> 💡 **สำคัญ**: สร้าง image จาก container ที่มีไฟล์ HTML แล้ว
+
+## 🌐 ทดสอบ Image ที่สร้างแล้ว
+
+### หยุดและลบ Container เก่า
 ```commandline
 docker stop nginx-web
-docker run -d -p 8080:80 --name nginx-web-test nginx-web
+docker rm nginx-web
+```
+
+### รัน Container จาก Image ใหม่
+```commandline
+docker run -d -p 8080:80 --name nginx-web-test custom-nginx:uat-v0.0.1
+```
+
+### ทดสอบเว็บไซต์
+```commandline
 curl localhost:8080
 ```
 
 > 📱 **ผลลัพธ์**: คุณจะเห็นหน้าเว็บที่สวยงามแสดงชื่อ Hayato360
 
-## 🔄 สร้าง Image จาก Container ที่มีไฟล์จริง
-
-### Commit Container เป็น Image ใหม่
+### Tag Image สำหรับ Docker Hub
 ```commandline
-docker stop nginx-web-test
-docker rm nginx-web-test
-docker commit nginx-web hayato360/nginx-web:uat-v0.0.1
+docker tag custom-nginx:uat-v0.0.1 hayato360/nginx-web:uat-v0.0.1
 ```
-
-> 💡 **สำคัญ**: ตอนนี้ไฟล์ HTML อยู่ใน container จริงๆ แล้ว commit จะได้ image ที่ถูกต้อง
 
 ### ตรวจสอบ Image ที่สร้าง
 ```commandline
