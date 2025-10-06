@@ -98,7 +98,7 @@ nginx-web
 
 # ติดแท๊ก image
 ```commandline
-docker tag nginx-web:latest <your_dockerhub_username>/nginx-web:uat-v0.0.1
+docker tag nginx <your_dockerhub_username>/nginx-web:uat-v0.0.1
 ```
 
 # push image ขึ้น docker hub

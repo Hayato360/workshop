@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  # Node.js API Version 0.0.1
+  nodejs-api-v1:
+    image: hayato360/nodejs-api:uat-v0.0.1
+    container_name: nodejs-api-v1
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    networks:
+      - workshop-network
+
+  # Node.js API Version 0.0.2
+  nodejs-api-v2:
+    image: hayato360/nodejs-api:uat-v0.0.2
+    container_name: nodejs-api-v2
+    ports:
+      - "3001:3000"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    networks:
+      - workshop-network
+
+  # Nginx Web Server
+  nginx-web:
+    image: hayato360/nginx-web:uat-v0.0.1
+    container_name: nginx-web
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    depends_on:
+      - nodejs-api-v1
+      - nodejs-api-v2
+    networks:
+      - workshop-network
+
+networks:
+  workshop-network:
+    driver: bridge
+    name: workshop-network
