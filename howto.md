@@ -11,11 +11,6 @@ cd myproject
 npm init -y
 ```
 
-# ติดตั้ง Express
-
-```commandline  
-npm install express
-```
 
 # เปิดโปรเจคด้วย VS Code
 
