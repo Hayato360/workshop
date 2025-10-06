@@ -119,7 +119,14 @@ app.listen(port, () => {
 ```
 
 
-# สร้าง image ใหม่เป็น version 0.0.2
+# รันคำสั่ง build image version 0.0.2
+
+```commandline
+docker build -t nodejs-api:uat-v0.0.2 .
+```
+
+
+# run image ใหม่ version 0.0.2
 
 ```commandline
 docker run -p 3000:3000 -d nodejs-api:uat-v0.0.2
@@ -159,7 +166,7 @@ docker push <<dockerhub-username>>/nodejs-api:uat-v0.0.1
 # tag image version 0.0.2
 
 ```commandline
-docker tag nodejs-api:uat-v0.0.1 <<dockerhub-username>>/nodejs-api:uat-v0.0.2
+docker tag nodejs-api:uat-v0.0.2 <<dockerhub-username>>/nodejs-api:uat-v0.0.2
 ```
 
 # push image version 0.0.2 ขึ้น docker hub
