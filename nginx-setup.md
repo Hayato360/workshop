@@ -16,7 +16,7 @@ cd ..
 
 # รันไฟล์แบบ map volume
 ```commandline
-docker run -d -p 8080:80 --name nginx-web -v ${PWD}/nginx-docker:/usr/share/nginx/html nginx
+docker run -d -p 8080:80 --name nginx-web -v ${PWD}:/usr/share/nginx/html nginx
 ```
 
 
@@ -31,7 +31,7 @@ curl localhost:8080
 
 # ทําการ exec เข้าไปใน container
 ```commandline
-docker exec -it nginx-web /bash
+docker exec -it nginx-web bash
 ```
 
 # หาตําแหน่งที่เราอยู่
