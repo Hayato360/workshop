@@ -259,7 +259,7 @@ nodejs-api
 เพิ่ม tag ที่มี Docker Hub username เพื่อเตรียม push ขึ้น Docker Hub
 
 ```commandline
-docker tag nodejs-api:uat-v0.0.1 <<dockerhub-username>>/nodejs-api:uat-v0.0.1
+docker tag nodejs-api:uat-v0.0.1 <<username>>/nodejs-api:uat-v0.0.1
 ```
 
 > 🎯 **การ Tag Image**: จำเป็นต้องมี username ใน tag เพื่อให้ push ขึ้น Docker Hub ได้
@@ -269,7 +269,7 @@ docker tag nodejs-api:uat-v0.0.1 <<dockerhub-username>>/nodejs-api:uat-v0.0.1
 อัปโหลด image ที่เราสร้างไว้ขึ้นสู่ Docker Hub repository
 
 ```commandline
-docker push <<dockerhub-username>>/nodejs-api:uat-v0.0.1
+docker push <<username>>/nodejs-api:uat-v0.0.1
 ```
 
 > ⬆️ **กระบวนการ Push**: Docker จะอัปโหลด layers ต่างๆ ของ image ไปยัง Docker Hub
@@ -283,7 +283,7 @@ docker push <<dockerhub-username>>/nodejs-api:uat-v0.0.1
 เพิ่ม tag สำหรับ version 0.0.2 เพื่อเตรียม push ขึ้น Docker Hub
 
 ```commandline
-docker tag nodejs-api:uat-v0.0.2 <<dockerhub-username>>/nodejs-api:uat-v0.0.2
+docker tag nodejs-api:uat-v0.0.2 <<username>>/nodejs-api:uat-v0.0.2
 ```
 
 > 📋 **Version Management**: การใช้ tag ที่แตกต่างกันจะช่วยในการจัดการ version ต่างๆ
@@ -293,7 +293,7 @@ docker tag nodejs-api:uat-v0.0.2 <<dockerhub-username>>/nodejs-api:uat-v0.0.2
 อัปโหลด image version ใหม่ขึ้นสู่ Docker Hub repository
 
 ```commandline
-docker push <<dockerhub-username>>/nodejs-api:uat-v0.0.2
+docker push <<username>>/nodejs-api:uat-v0.0.2
 ``` 
 
 > 🆕 **การ Push Version ใหม่**: Image version ใหม่จะถูกอัปโหลดและเก็บไว้ใน repository เดียวกัน
@@ -309,7 +309,7 @@ docker push <<dockerhub-username>>/nodejs-api:uat-v0.0.2
 ดาวน์โหลด image version 0.0.1 จาก Docker Hub มายังเครื่องของเรา
 
 ```commandline
-docker pull <<dockerhub-username>>/nodejs-api:uat-v0.0.1
+docker pull <<username>>/nodejs-api:uat-v0.0.1
 ```
 
 > 📦 **การ Pull Image**: คำสั่งนี้จะดาวน์โหลด image จาก Docker Hub repository มาเก็บไว้ในเครื่องเรา
@@ -319,7 +319,7 @@ docker pull <<dockerhub-username>>/nodejs-api:uat-v0.0.1
 ดาวน์โหลด image version 0.0.2 จาก Docker Hub มายังเครื่องของเรา
 
 ```commandline
-docker pull <<dockerhub-username>>/nodejs-api:uat-v0.0.2
+docker pull <<username>>/nodejs-api:uat-v0.0.2
 ```
 
 > 🔄 **การ Pull Version ใหม่**: สามารถดาวน์โหลด version ต่างๆ ได้ตามต้องการ
@@ -328,12 +328,12 @@ docker pull <<dockerhub-username>>/nodejs-api:uat-v0.0.2
 
 ### รัน Version 0.0.1
 ```commandline
-docker run -p 3000:3000 -d <<dockerhub-username>>/nodejs-api:uat-v0.0.1
+docker run -p 3000:3000 -d --name <<username>>-nodejs-api-v1 <<username>>/nodejs-api:uat-v0.0.1
 ```
 
 ### รัน Version 0.0.2
 ```commandline
-docker run -p 3001:3000 -d <<dockerhub-username>>/nodejs-api:uat-v0.0.2
+docker run -p 3001:3000 -d --name <<username>>-nodejs-api-v2 <<username>>/nodejs-api:uat-v0.0.2
 ```
 
 > 💡 **เคล็ดลับ**: ใช้ port ต่างกันเพื่อรัน version ต่างๆ พร้อมกัน (port 3000 และ 3001)
