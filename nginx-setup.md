@@ -90,33 +90,42 @@ cd nginx-docker
 cd ..
 ```
 
-## 🚀 รัน Container แบบ Volume Mount (สำหรับทดสอบ)
+## 🚀 รัน Container เพื่อคัดลอกไฟล์เข้าไป
 ```commandline
-docker run -d -p 8080:80 --name nginx-web -v ${PWD}/nginx-docker:/usr/share/nginx/html nginx
+docker run -d --name nginx-web nginx
 ```
 
-## ✅ ตรวจสอบ Container ที่รันอยู่
+## 📁 คัดลอกไฟล์ HTML เข้าไปใน Container
 ```commandline
-docker ps
+docker cp nginx-docker/index.html nginx-web:/usr/share/nginx/html/
 ```
 
-## 🌐 ทดสอบ curl
+> 💡 **สำคัญ**: `docker cp` จะคัดลอกไฟล์เข้าไปใน container จริงๆ ไม่ใช่แค่ mount
+
+## ✅ ทดสอบว่าไฟล์ถูกคัดลอกแล้ว
 ```commandline
+docker exec nginx-web cat /usr/share/nginx/html/index.html
+```
+
+## 🌐 ทดสอบเว็บไซต์
+```commandline
+docker stop nginx-web
+docker run -d -p 8080:80 --name nginx-web-test nginx-web
 curl localhost:8080
 ```
 
 > 📱 **ผลลัพธ์**: คุณจะเห็นหน้าเว็บที่สวยงามแสดงชื่อ Hayato360
 
-## 🔄 สร้าง Image จาก Container ที่แก้ไขแล้ว
+## 🔄 สร้าง Image จาก Container ที่มีไฟล์จริง
 
 ### Commit Container เป็น Image ใหม่
-หลังจากยืนยันว่า container ทำงานถูกต้อง ต้อง commit container เป็น image
-
 ```commandline
+docker stop nginx-web-test
+docker rm nginx-web-test
 docker commit nginx-web hayato360/nginx-web:uat-v0.0.1
 ```
 
-> 💡 **สำคัญ**: คำสั่งนี้จะสร้าง image ใหม่จากสิ่งที่อยู่ใน container (รวม index.html ที่แก้ไขแล้ว)
+> 💡 **สำคัญ**: ตอนนี้ไฟล์ HTML อยู่ใน container จริงๆ แล้ว commit จะได้ image ที่ถูกต้อง
 
 ### ตรวจสอบ Image ที่สร้าง
 ```commandline
